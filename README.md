@@ -1,4 +1,4 @@
-# Delat 3Dprinter
+# Delta 3Dprinter
 
 Marlin 3D Printer Firmware
 
