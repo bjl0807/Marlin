@@ -1,60 +1,69 @@
-# FDM SCARA
-
-Pavlo Gryb
-Marlin 3D Printer Firmware
-
 # Marlin 3D Printer Firmware
-<img align="top" width=175 src="Documentation/Logo/Marlin%20Logo%20GitHub.png" />
- Additional documentation can be found in [The Marlin Wiki](https://github.com/MarlinFirmware/Marlin/wiki).
 
-##Fork changes (DELTAXY):
-  - DELTAXY configuration added (just add #include "example_configurations/DeltaXY/Configuration.h" to Marlin/configuration.h)
-  - M665 - DELTAXY - Set deltaxy configurations A#ArmAX B#ArmBX L#ArmALen M#ArmBLen O#ArmAMountOffsetLen P#ArmAMountOffsetAngle S#segments_per_sec
+<img align="top" width=175 src="buildroot/share/pixmaps/logo/marlin-250.png" />
 
-Note: Visualization and math - https://jsfiddle.net/9L42z9he/
+Additional documentation can be found at [The Marlin Documentation Project](https://www.marlinfw.org/).
+Please test this firmware and inform us if it misbehaves in any way, volunteers are standing by!
 
-##Fork changes (SCARA):
-  - FIVE_BAR define added (works together with SCARA define)
-  - Extra arm added to mount end effector (EndPointMountOffset and EndPointMountAngle defines)
-  - added M453 - X#Linkage1 Y#Linkage2 O#EndPointMountOffset A#EndPointMountAngle D#AxisDistances S#segments_per_sec
-  - added M370 - X#Angle Y#Angle
-  - G2/G3 commands support
-  - Fixed math for pure SCARA (2 arms)
-
-##Fork changes (GENERAL):
-  - added M454 - xyz home dir
-  - added M450 - xyz min limits
-  - added M451 - xyz max limits
-  - added M452 - xyz home pos
-  - added M98 - reports hysteresis (available only if DEFAULT_HYSTERESIS_MM defined)
-  - added M99 - sets hysteresis (available only if DEFAULT_HYSTERESIS_MM defined)
-  - added M210 - Set the feedrates used for homing to the values specified in mm per minute. 
-
-
-
-About FIVE_BAR or SCARA_TYPE 2
-It is suported, but it may be broken (i just left old code but some artifacts may appear)
-Last stable version with fivebar tested limited by changelist - 8e789cd9eb17dd5e8e8ee45dbc814715ddcb8e36 (11 Aug 2015)
-
-## Release Candidate -- Marlin 1.1.0-RC6 - 24 April 2016
+## Release Candidate -- Marlin 1.1.0-RC8 - 6 Dec 2016
 
 __Not for production use – use with caution!__
 
 You can download earlier versions of Marlin on the [Releases page](https://github.com/MarlinFirmware/Marlin/releases). (The latest "stable" release of Marlin is 1.0.2-1.)
 
-You'll always find the latest Release Candidate in the ["RC" branch](https://github.com/MarlinFirmware/Marlin/tree/RC). Bugs that we find in the current Release Candidate are patched in the ["RCBugFix" branch](https://github.com/MarlinFirmware/Marlin/tree/RC), so during beta testing this is where you can always find the latest code on its way towards release.
-
-Future development (Marlin 1.2 and beyond) takes place in the [MarlinDev repository](https://github.com/MarlinFirmware/MarlinDev/).
+The latest Release Candidate lives in the ["RC" branch](https://github.com/MarlinFirmware/Marlin/tree/RC). Bugs that we find in the current Release Candidate are patched in the ["RCBugFix" branch](https://github.com/MarlinFirmware/Marlin/tree/RCBugFix), so during beta testing this is where you can always find the latest code on its way towards release.
 
 ## Recent Changes
-- RCBugFix
-  - Throw error if compiling with older versions (<1.60) of Arduino due to serious problems with outdated Arduino versions
-  - Please upgrade your IDE at least to Arduino 1.6.0. Thanks.
+- RC8 - 06 Dec 2016
+  - Major performance improvement for Graphical LCDs
+  - Simplified probe configuration
+  - Enable Auto Bed Leveling by type
+  - Reduce serial communication errors
+  - Make Bilinear (Mesh) Grid Leveling available for non-delta
+  - Support for Trinamic TMC2130 SilentStepStick SPI-based drivers
+  - Add `M211` to Enable/Disable Software Endstops
+  - Add `M355` to turn the case light on/off and set brightness
+  - Improved I2C class with full master/slave support
+  - Add `G38.2` `G38.3` command option for CNC style probing
+  - Add `MINIMUM_STEPPER_PULSE` option to adjust step pulse duration
+  - Add `R` parameter support for `G2`/`G3`
+  - Add `M43` optional command (`PINS_DEBUGGING`)
+  - Remove SCARA axis scaling
+  - Improved sanity checking of configuration
+  - Improved support for PlatformIO and command-line build
+  - Usable `DELTA_CALIBRATION_MENU`
+  - Support for Printrbot Rev.F
+  - New and updated languages
 
-- RC6 - 23 Apr 2016
-  - Completed support for CoreXY / CoreXZ in planner
-  - Changes to positioning behavior
-  - Various issues fixed. More details pending.
+- RC7 - 31 Jul 2016
+  - Add Print Job Timer and Print Counter (`PRINTCOUNTER`)
+  - New `M600` Filament Change (`FILAMENT_CHANGE_FEATURE`)
+  - New `G12` Nozzle Clean (`NOZZLE_CLEAN_FEATURE`)
+  - New `G27` Nozzle Park (`NOZZLE_PARK_FEATURE`)
+  - Add support for `COREYZ`
+  - Add a new Advance Extrusion algorithm (`LIN_ADVANCE`)
+  - Add support for inches, Fahrenheit, Kelvin units (`INCH_MODE_SUPPORT`, `TEMPERATURE_UNITS_SUPPORT`)
+  - Better handling of `G92` shifting of the coordinate space
+  - Add Greek and Croatian languages
+  - Improve the Manual (Mesh) Bed Leveling user interface
+  - Add support for more boards, controllers, and probes:
+    - Vellemann K8400 (`BOARD_K8400`)
+    - RigidBot V2 (`BOARD_RIGIDBOARD_V2`)
+    - Cartesio UI (`BOARD_CNCONTROLS_12`)
+    - BLTouch probe sensor (`BLTOUCH`)
+    - Viki 2 with RAMPS and MKS boards
+  - Improve support for `DELTA` and other kinematics
+  - Improve thermal management, add `WATCH_BED_TEMP_PERIOD`
+  - Better handling of toolchange, multiple tools
+  - Add support for two X steppers `X_DUAL_STEPPER_DRIVERS`
+  - Add support for `SINGLENOZZLE`, `MIXING_EXTRUDER`, and `SWITCHING_EXTRUDER`
+  - Simplified probe configuration, allow usage without bed leveling
+  - And much more… See the [1.1.0-RC7 Change Log](https://github.com/MarlinFirmware/Marlin/releases/tag/1.1.0-RC7) for the complete list of changes.
+
+- RC6 - 24 Apr 2016
+  - Marlin now requires Arduino version 1.6.0 or later
+  - Completed support for CoreXY / CoreXZ
+  - See the [1.1.0-RC6 Change Log](https://github.com/MarlinFirmware/Marlin/releases/tag/1.1.0-RC6) for all the changes.
 
 - RC5 - 01 Apr 2016
   - Warn if compiling with older versions (<1.50) of Arduino
@@ -67,7 +76,7 @@ Future development (Marlin 1.2 and beyond) takes place in the [MarlinDev reposit
   - Rename FILAMENT_SENSOR to FILAMENT_WIDTH_SENSOR
   - Fix SD card bugs
   - and a lot more
-  - see https://github.com/MarlinFirmware/Marlin/releases/tag/1.1.0-RC5 for details
+  - See the [1.1.0-RC5 Change Log](https://github.com/MarlinFirmware/Marlin/releases/tag/1.1.0-RC5) for more!
 
 - RC4 - 24 Mar 2016
   - Many lingering bugs and nagging issues addressed
