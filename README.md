@@ -1,3 +1,7 @@
+# coreXY
+
+Marlin 3D Printer Firmware
+
 # Marlin 3D Printer Firmware
 
 <img align="top" width=175 src="buildroot/share/pixmaps/logo/marlin-250.png" />
